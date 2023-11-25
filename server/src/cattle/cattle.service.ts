@@ -12,9 +12,9 @@ export class CattleService {
     return updatedData
   }
 
-  requestCattleSale(cattleId: string): Promise<any> {
+  requestCattleSale(cattleId: string, saleData: any): Promise<any> {
     // 가축 판매 신청 로직
-    return 
+    return saleData
   }
 
   getAllForSaleCattle(): Promise<any[]> {

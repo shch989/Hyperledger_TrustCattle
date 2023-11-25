@@ -26,10 +26,10 @@ export class CattleController {
     return result
   }
 
-  @Post('sell-request')
-  async sellRequest(@Body() body: any) {
+  @Post('sell-request/:cattleId')
+  async sellRequest(@Param('cattleId') cattleId: string, @Body() body: any) {
     // 가축 판매 신청
-    const result = await this.cattleService.requestCattleSale(body)
+    const result = await this.cattleService.requestCattleSale(cattleId, body)
     return result
   }
 }
