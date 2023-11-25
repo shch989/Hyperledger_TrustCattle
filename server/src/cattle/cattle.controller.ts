@@ -20,8 +20,10 @@ export class CattleController {
   }
 
   @Get('get-all-for-sale')
-  getAllForSaleCattle() {
-    return this.cattleService.getAllForSaleCattle();
+  async getAllForSaleCattle() {
+    // 판매중인 모든 가축 정보 출력
+    const result = await this.cattleService.getAllForSaleCattle();
+    return result
   }
 
   @Post('sell-request')
