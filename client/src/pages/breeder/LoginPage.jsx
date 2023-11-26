@@ -35,6 +35,23 @@ const ContentContainer = styled.div`
   padding: 20px;
 `;
 
+const BackMainPage = styled.div`
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+`;
+
+const BackMainPageLink = styled.a`
+  text-decoration: none; 
+  font-weight: 600;
+  color: #333;
+
+  &:hover {
+    text-decoration: none;
+    color: #555;
+  }
+`;
+
 const LoginPage = () => {
   const [selectedTab, setSelectedTab] = useState('login');
 
@@ -64,6 +81,9 @@ const LoginPage = () => {
           <ContentContainer>
             {selectedTab === 'login' && <SignIn />}
             {selectedTab === 'signup' && <SignUp />}
+            <BackMainPage>
+              <BackMainPageLink href="/">돌아가기</BackMainPageLink>
+            </BackMainPage>
           </ContentContainer>
         </LoginBackground>
       </StyleSheetManager>
