@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 // import styled from 'styled-components';
 // components
-import Background from '../../components/UI/Background';
-import Input from '../../components/UI/Input'
-import Button from '../../components/UI/Button';
+import Background from '../UI/Background';
+import Input from '../UI/Input'
+import Button from '../UI/Button';
 
-const Login = () => {
+const SignIn = () => {
   const [userId, setUserId] = useState('');
   const [userPw, setUserPw] = useState('');
 
@@ -13,7 +13,7 @@ const Login = () => {
     event.preventDefault()
 
     alert(`회원가입 되었습니다.`)
-    setUserId('')
+    setUserId('') 
     setUserPw('')
   };
 
@@ -42,4 +42,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default SignIn

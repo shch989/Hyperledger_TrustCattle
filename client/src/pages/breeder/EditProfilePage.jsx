@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom';
 
-const EditProfile = () => {
+const EditProfilePage = () => {
   const { userId } = useParams();
 
   return (
@@ -9,4 +9,4 @@ const EditProfile = () => {
   )
 }
 
-export default EditProfile
+export default EditProfilePage

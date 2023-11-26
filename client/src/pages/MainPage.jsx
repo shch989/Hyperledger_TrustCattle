@@ -26,7 +26,6 @@ const ButtonLink = styled(Link)`
 const MainPage = () => {
   return (
     <ButtonContainer>
-      <ButtonLink to="/signup">사육자 등록</ButtonLink>
       <ButtonLink to="/login">사육자 로그인</ButtonLink>
       <ButtonLink to="/edit-profile/:userId">사육자 정보 수정</ButtonLink>
       <ButtonLink to="/registerCattle">가축 등록</ButtonLink>

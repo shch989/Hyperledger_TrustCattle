@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 // components
-import Background from '../../components/UI/Background';
-import Input from '../../components/UI/Input'
-import Button from '../../components/UI/Button';
+import Background from '../UI/Background';
+import Input from '../UI/Input'
+import Button from '../UI/Button';
 
 const SignUp = () => {
   const [userId, setUserId] = useState('');

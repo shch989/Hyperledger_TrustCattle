@@ -1,36 +1,34 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 // Pages
+import MainPagePage from './pages/MainPage'
 // breeder
-import MainPage from './pages/MainPage'
-import SignUp from './pages/breeder/SignUp'
-import Login from './pages/breeder/Login'
-import EditProfile from './pages/breeder/EditProfile'
+import LoginPage from './pages/breeder/LoginPage'
+import EditProfilePage from './pages/breeder/EditProfilePage'
 // cattle
-import RegisterCattle from './pages/cattle/RegisterCattle'
-import EditCattleInfo from './pages/cattle/EditCattleInfo'
-import BreederCattleList from './pages/cattle/BreederCattleList'
+import RegisterCattlePage from './pages/cattle/RegisterCattlePage'
+import EditCattleInfoPage from './pages/cattle/EditCattleInfoPage'
+import BreederCattleListPage from './pages/cattle/BreederCattleListPage'
 // transaction
-import ForSaleCattleList from './pages/transaction/ForSaleCattleList'
-import SellRequest from './pages/transaction/SellRequest'
-import BuyRequest from './pages/transaction/BuyRequest'
-import TransactionComplete from './pages/transaction/TransactionComplete'
+import ForSaleCattleListPage from './pages/transaction/ForSaleCattleListPage'
+import SellRequestPage from './pages/transaction/SellRequestPage'
+import BuyRequestPage from './pages/transaction/BuyRequestPage'
+import TransactionCompletePage from './pages/transaction/TransactionCompletePage'
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/edit-profile/:userId" element={<EditProfile />} />
-        <Route path="/registerCattle" element={<RegisterCattle />} />
-        <Route path="/edit-cattle/:cattleId" element={<EditCattleInfo />} />
-        <Route path="/cattle-list/:userId" element={<BreederCattleList />} />
-        <Route path="/sale-cattle-list" element={<ForSaleCattleList />} />
-        <Route path="/sell-request/:cattleId" element={<SellRequest />} />
-        <Route path="/buy-request/:cattleId" element={<BuyRequest />} />
-        <Route path="/transaction-complete" element={<TransactionComplete />} />
+        <Route path="/" element={<MainPagePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/edit-profile/:userId" element={<EditProfilePage />} />
+        <Route path="/registerCattle" element={<RegisterCattlePage />} />
+        <Route path="/edit-cattle/:cattleId" element={<EditCattleInfoPage />} />
+        <Route path="/cattle-list/:userId" element={<BreederCattleListPage />} />
+        <Route path="/sale-cattle-list" element={<ForSaleCattleListPage />} />
+        <Route path="/sell-request/:cattleId" element={<SellRequestPage />} />
+        <Route path="/buy-request/:cattleId" element={<BuyRequestPage />} />
+        <Route path="/transaction-complete" element={<TransactionCompletePage />} />
       </Routes>
     </Router>
   )
