@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 // import styled from 'styled-components';
 // components
-import Background from '../UI/Background';
 import Input from '../UI/Input'
 import Button from '../UI/Button';
 
@@ -13,12 +12,11 @@ const SignIn = () => {
     event.preventDefault()
 
     alert(`회원가입 되었습니다.`)
-    setUserId('') 
+    setUserId('')
     setUserPw('')
   };
 
   return (
-    <Background>
       <form onSubmit={handleAdminSubmit}>
         <Input
           label="아이디"
@@ -38,7 +36,6 @@ const SignIn = () => {
         />
         <Button>로그인</Button>
       </form>
-    </Background>
   )
 }
 

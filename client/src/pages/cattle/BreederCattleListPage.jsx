@@ -1,7 +1,8 @@
 import React from 'react'
 import { useParams } from 'react-router-dom';
 
-const BreederCattleList = () => {
+const BreederCattleListPage
+ = () => {
   const { userId } = useParams();
 
   return (
@@ -9,4 +10,4 @@ const BreederCattleList = () => {
   )
 }
 
-export default BreederCattleList
+export default BreederCattleListPage
