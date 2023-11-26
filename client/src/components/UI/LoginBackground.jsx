@@ -11,10 +11,10 @@ const BackgroundStyle = styled.div`
   padding-bottom: 60px;
 `
 
-const Background = (props) => {
+const LoginBackground = (props) => {
   return (
     <BackgroundStyle>{props.children}</BackgroundStyle>
   )
 }
 
-export default Background
+export default LoginBackground

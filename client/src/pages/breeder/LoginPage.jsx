@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { styled, createGlobalStyle, StyleSheetManager } from 'styled-components';
 import SignIn from '../../components/breeder/SignIn';
 import SignUp from '../../components/breeder/SignUp';
-import Background from '../../components/UI/Background';
+import LoginBackground from '../../components/UI/LoginBackground';
 
 const GlobalStyle = createGlobalStyle`
   [isSelected] {
@@ -46,7 +46,7 @@ const LoginPage = () => {
     <Fragment>
       <StyleSheetManager shouldForwardProp={(prop) => prop !== 'isSelected'}>
         <GlobalStyle />
-        <Background>
+        <LoginBackground>
           <TabsContainer>
             <TabButton
               isSelected={selectedTab === 'login'}
@@ -65,7 +65,7 @@ const LoginPage = () => {
             {selectedTab === 'login' && <SignIn />}
             {selectedTab === 'signup' && <SignUp />}
           </ContentContainer>
-        </Background>
+        </LoginBackground>
       </StyleSheetManager>
     </Fragment>
   );
