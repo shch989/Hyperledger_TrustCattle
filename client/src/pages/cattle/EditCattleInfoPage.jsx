@@ -53,36 +53,38 @@ const EditCattleInfoPage = () => {
   return (
     <MainBackground>
       <InputBoxStyle>
-        <PageTitle>접종 이력 추가</PageTitle>
-        <VaccinationBox>
-          <ul>
-            {addedVaccinationHistory.map((vaccine, index) => (
-              <li key={index}>
-                <strong>백신 이름:</strong> {vaccine.vaccineName}, <strong>접종 일자:</strong> {vaccine.date}
-                <StyledButton type="button" onClick={() => handleRemoveVaccination(index)}>
-                  삭제
-                </StyledButton>
-              </li>
-            ))}
-          </ul>
-        </VaccinationBox>
-        <Input
-          label="백신 이름"
-          type="text"
-          value={newVaccine.vaccineName}
-          onChange={(e) => setNewVaccine({ ...newVaccine, vaccineName: e.target.value })}
-        />
-        <Input
-          label="접종 일자"
-          type="date"
-          value={newVaccine.date}
-          onChange={(e) => setNewVaccine({ ...newVaccine, date: e.target.value })}
-        />
-        <Button type="button" onClick={handleAddVaccination}>
-          백신 추가
-        </Button>
-        <PageTitle>가축 정보 수정</PageTitle>
         <form onSubmit={handleCattleSubmit}>
+          <PageTitle>접종 이력 추가</PageTitle>
+          <VaccinationBox>
+            <ul>
+              {addedVaccinationHistory.map((vaccine, index) => (
+                <li key={index}>
+                  <strong>백신 이름:</strong> {vaccine.vaccineName}, <strong>접종 일자:</strong> {vaccine.date}
+                  <StyledButton type="button" onClick={() => handleRemoveVaccination(index)}>
+                    삭제
+                  </StyledButton>
+                </li>
+              ))}
+            </ul>
+          </VaccinationBox>
+          <Input
+            label="백신 이름"
+            type="text"
+            value={newVaccine.vaccineName}
+            placeholder="백신 일련번호"
+            onChange={(e) => setNewVaccine({ ...newVaccine, vaccineName: e.target.value })}
+          />
+          <Input
+            label="접종 일자"
+            type="date"
+            value={newVaccine.date}
+            onChange={(e) => setNewVaccine({ ...newVaccine, date: e.target.value })}
+          />
+          <Button type="button" onClick={handleAddVaccination}>
+            백신 추가
+          </Button>
+          <PageTitle>가축 정보 수정</PageTitle>
+
           <Input
             label="체중(Kg)"
             type="number"

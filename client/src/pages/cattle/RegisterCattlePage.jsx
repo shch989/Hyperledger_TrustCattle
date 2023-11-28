@@ -93,6 +93,7 @@ const RegisterCattlePage = () => {
           label="백신 이름"
           type="text"
           value={newVaccine.vaccineName}
+          placeholder="백신 일련번호"
           onChange={(e) => setNewVaccine({ ...newVaccine, vaccineName: e.target.value })}
         />
         <Input
@@ -104,7 +105,7 @@ const RegisterCattlePage = () => {
         <Button type="button" onClick={handleAddVaccination}>
           백신 추가
         </Button>
-        
+
         <PageTitle>가축 정보</PageTitle>
         <form onSubmit={handleCattleSubmit}>
           <Input

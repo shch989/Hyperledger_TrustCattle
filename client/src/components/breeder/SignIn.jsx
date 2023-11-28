@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 // import styled from 'styled-components';
 // components
 import Input from '../UI/Input'
@@ -7,13 +8,16 @@ import Button from '../UI/Button';
 const SignIn = () => {
   const [userId, setUserId] = useState('');
   const [userPw, setUserPw] = useState('');
+  const navigate = useNavigate()
 
   const handleAdminSubmit = async (event) => {
     event.preventDefault()
 
-    alert(`회원가입 되었습니다.`)
+    localStorage.setItem('token', userPw)
+    localStorage.setItem('userName', userId)
     setUserId('')
     setUserPw('')
+    navigate('/')
   };
 
   return (

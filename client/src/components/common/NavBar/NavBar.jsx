@@ -82,8 +82,21 @@ const UserProfile = styled.a.attrs({})`
   transition: all 0.2s;
 `;
 
+const CattleListPageLink = styled.a`
+  text-decoration: none; 
+  font-weight: 600;
+  color: #a2a2a2;
+  margin: 0 10px;
+
+  &:hover {
+    text-decoration: none;
+    color: #555;
+  }
+`;
+
 const Navbar = () => {
   const { pathname } = useLocation();
+  // 테스트용
   const token = localStorage.getItem('token');
   const userName = localStorage.getItem('userName');
 
@@ -107,7 +120,12 @@ const Navbar = () => {
         <User>
           {token ? (
             <Fragment>
-              <UserProfile>Welcome {userName}(님)</UserProfile>
+              <UserProfile>
+                Welcome
+                <CattleListPageLink href="/cattle-list/:userId">
+                  {userName}(님)
+                </CattleListPageLink>
+              </UserProfile>
               <LogOutButton />
             </Fragment>
           ) : (
