@@ -17,7 +17,7 @@ const cattleData = [
     "vaccinationRecord": [{ "vaccineName": "qwe", "date": "2021-01-02" }, { "vaccineName": "qwees", "date": "2021-01-05" }],
     "parentCattleID": { "mom": 125, "dad": 25 },
     "survivalStatus": "Alive",
-    "ownerID": 1,
+    "ownerID": 11,
     "price": 500000
   },
   {
@@ -28,7 +28,7 @@ const cattleData = [
     "vaccinationRecord": [{ "vaccineName": "abc", "date": "2021-02-02" }, { "vaccineName": "xyz", "date": "2021-02-05" }],
     "parentCattleID": { "mom": 130, "dad": 30 },
     "survivalStatus": "Alive",
-    "ownerID": 2,
+    "ownerID": 12,
     "price": 550000
   },
   {
@@ -39,7 +39,7 @@ const cattleData = [
     "vaccinationRecord": [{ "vaccineName": "lmn", "date": "2021-03-02" }, { "vaccineName": "pqr", "date": "2021-03-05" }],
     "parentCattleID": { "mom": 135, "dad": 35 },
     "survivalStatus": "Alive",
-    "ownerID": 3,
+    "ownerID": 13,
     "price": 50000000
   },
   {
@@ -50,7 +50,7 @@ const cattleData = [
     "vaccinationRecord": [{ "vaccineName": "ijk", "date": "2021-04-02" }, { "vaccineName": "uvw", "date": "2021-04-05" }],
     "parentCattleID": { "mom": 140, "dad": 40 },
     "survivalStatus": "Dead",
-    "ownerID": 4,
+    "ownerID": 14,
     "price": 520000
   },
   {
@@ -61,7 +61,7 @@ const cattleData = [
     "vaccinationRecord": [{ "vaccineName": "def", "date": "2021-05-02" }, { "vaccineName": "ghi", "date": "2021-05-05" }, { "vaccineName": "ghiewe", "date": "2021-05-07" }, { "vaccineName": "ghiewe", "date": "2021-05-07" }],
     "parentCattleID": { "mom": 145, "dad": 45 },
     "survivalStatus": "Alive",
-    "ownerID": 5,
+    "ownerID": 15,
     "price": 580000
   },
   {
@@ -72,7 +72,7 @@ const cattleData = [
     "vaccinationRecord": [{ "vaccineName": "rst", "date": "2021-06-02" }, { "vaccineName": "opq", "date": "2021-06-05" }],
     "parentCattleID": { "mom": 150, "dad": 50 },
     "survivalStatus": "Alive",
-    "ownerID": 6,
+    "ownerID": 16,
     "price": 530000
   },
   {
@@ -83,7 +83,7 @@ const cattleData = [
     "vaccinationRecord": [{ "vaccineName": "xyz", "date": "2021-07-02" }, { "vaccineName": "uvw", "date": "2021-07-05" }],
     "parentCattleID": { "mom": 155, "dad": 55 },
     "survivalStatus": "Alive",
-    "ownerID": 7,
+    "ownerID": 17,
     "price": 620000
   },
   {
@@ -94,7 +94,7 @@ const cattleData = [
     "vaccinationRecord": [{ "vaccineName": "opq", "date": "2021-08-02" }, { "vaccineName": "rst", "date": "2021-08-05" }],
     "parentCattleID": { "mom": 160, "dad": 60 },
     "survivalStatus": "Alive",
-    "ownerID": 8,
+    "ownerID": 18,
     "price": 540000
   },
   {
@@ -105,7 +105,7 @@ const cattleData = [
     "vaccinationRecord": [{ "vaccineName": "uvw", "date": "2021-09-02" }, { "vaccineName": "rst", "date": "2021-09-05" }],
     "parentCattleID": { "mom": 165, "dad": 65 },
     "survivalStatus": "Dead",
-    "ownerID": 9,
+    "ownerID": 19,
     "price": 560000
   },
   {
@@ -116,7 +116,7 @@ const cattleData = [
     "vaccinationRecord": [{ "vaccineName": "ghi", "date": "2021-10-02" }, { "vaccineName": "def", "date": "2021-10-05" }],
     "parentCattleID": { "mom": 170, "dad": 70 },
     "survivalStatus": "Alive",
-    "ownerID": 10,
+    "ownerID": 20,
     "price": 570000
   }
 ]

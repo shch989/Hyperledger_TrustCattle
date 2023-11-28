@@ -14,6 +14,8 @@ import ForSaleCattleListPage from './pages/transaction/ForSaleCattleListPage'
 import SellRequestPage from './pages/transaction/SellRequestPage'
 import BuyRequestPage from './pages/transaction/BuyRequestPage'
 import TransactionCompletePage from './pages/transaction/TransactionCompletePage'
+// NotFoundPage
+import NotFoundPage from './pages/NotFoundPage'
 // UI
 import Layout from './components/UI/Layout'
 
@@ -41,6 +43,7 @@ const App = () => {
             path="/transaction-complete"
             element={<TransactionCompletePage />}
           />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Layout>
     </Router>

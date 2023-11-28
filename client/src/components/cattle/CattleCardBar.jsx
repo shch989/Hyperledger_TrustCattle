@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import CattleDetailPortal from './CattleDetailPortal';
 
 const CardContainer = styled.div`
   display: flex;
@@ -44,8 +45,17 @@ const truncateVaccination = (vaccinationRecord) => {
   }
 };
 
-const CattleCardBar = ({ cattle, onDetailClick, onRequestClick }) => {
+const CattleCardBar = ({ cattle, onRequestClick }) => {
   const { cattleID, birthDate, gender, weight, vaccinationRecord, survivalStatus, price } = cattle;
+  const [isDetailOpen, setIsDetailOpen] = useState(false);
+
+  const handleDetailClick = () => {
+    setIsDetailOpen(true);
+  };
+
+  const handleCloseDetail = () => {
+    setIsDetailOpen(false);
+  };
 
   return (
     <CardContainer>
@@ -74,13 +84,14 @@ const CattleCardBar = ({ cattle, onDetailClick, onRequestClick }) => {
       </DataContainer>
 
       <div>
-        <Button onClick={onDetailClick}>자세히</Button>
+        <Button onClick={handleDetailClick}>자세히</Button>
       </div>
       <div>
         <Button onClick={onRequestClick} disabled={survivalStatus !== 'Alive'}>
           요청
         </Button>
       </div>
+      {isDetailOpen && <CattleDetailPortal cattle={cattle} onClose={handleCloseDetail} />}
     </CardContainer>
   );
 };
