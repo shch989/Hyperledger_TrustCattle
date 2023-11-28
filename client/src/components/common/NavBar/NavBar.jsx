@@ -97,10 +97,10 @@ const Navbar = () => {
           <MenuItem isActive={pathname === '/'}>
             <a href="/">Home</a>
           </MenuItem>
-          <MenuItem isActive={pathname === '/login'}>
-            <a href="/login">가축등록</a>
-          </MenuItem>
           <MenuItem isActive={pathname === '/registerCattle'}>
+            <a href="/registerCattle">가축등록</a>
+          </MenuItem>
+          <MenuItem isActive={pathname === '/control'}>
             <a href="/control">가축거래</a>
           </MenuItem>
         </Menu>

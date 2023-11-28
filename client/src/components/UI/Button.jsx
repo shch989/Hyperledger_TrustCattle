@@ -1,4 +1,6 @@
-import React from 'react'
+// Button.js
+
+import React from 'react';
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
@@ -20,9 +22,13 @@ const StyledButton = styled.button`
 `;
 
 const Button = (props) => {
-  return (
-    <StyledButton>{props.children}</StyledButton>
-  )
-}
+  const { type, children, onClick } = props;
 
-export default Button
+  return (
+    <StyledButton type={type} onClick={onClick}>
+      {children}
+    </StyledButton>
+  );
+};
+
+export default Button;
