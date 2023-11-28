@@ -37,7 +37,7 @@ const RegisterCattlePage = () => {
     { value: 'female', label: '암컷' },
   ];
 
-  const handleAdminSubmit = async (event) => {
+  const handleCattleSubmit = async (event) => {
     event.preventDefault();
 
     const parentCattleInfo = {
@@ -76,8 +76,37 @@ const RegisterCattlePage = () => {
   return (
     <MainBackground>
       <InputBoxStyle>
+        <PageTitle>접종 이력</PageTitle>
+        <VaccinationBox>
+          <ul>
+            {addedVaccinationHistory.map((vaccine, index) => (
+              <li key={index}>
+                <strong>백신 이름:</strong> {vaccine.vaccineName}, <strong>접종 일자:</strong> {vaccine.date}
+                <StyledButton type="button" onClick={() => handleRemoveVaccination(index)}>
+                  삭제
+                </StyledButton>
+              </li>
+            ))}
+          </ul>
+        </VaccinationBox>
+        <Input
+          label="백신 이름"
+          type="text"
+          value={newVaccine.vaccineName}
+          onChange={(e) => setNewVaccine({ ...newVaccine, vaccineName: e.target.value })}
+        />
+        <Input
+          label="접종 일자"
+          type="date"
+          value={newVaccine.date}
+          onChange={(e) => setNewVaccine({ ...newVaccine, date: e.target.value })}
+        />
+        <Button type="button" onClick={handleAddVaccination}>
+          백신 추가
+        </Button>
+        
         <PageTitle>가축 정보</PageTitle>
-        <form onSubmit={handleAdminSubmit}>
+        <form onSubmit={handleCattleSubmit}>
           <Input
             label="가축 아이디"
             type="text"
@@ -105,35 +134,6 @@ const RegisterCattlePage = () => {
             placeholder="가축 체중(단위 생략)"
             onChange={(e) => setWeight(e.target.value)}
           />
-
-          <PageTitle>접종 이력</PageTitle>
-          <VaccinationBox>
-            <ul>
-              {addedVaccinationHistory.map((vaccine, index) => (
-                <li key={index}>
-                  <strong>백신 이름:</strong> {vaccine.vaccineName}, <strong>접종 일자:</strong> {vaccine.date}
-                  <StyledButton type="button" onClick={() => handleRemoveVaccination(index)}>
-                    삭제
-                  </StyledButton>
-                </li>
-              ))}
-            </ul>
-          </VaccinationBox>
-          <Input
-            label="백신 이름"
-            type="text"
-            value={newVaccine.vaccineName}
-            onChange={(e) => setNewVaccine({ ...newVaccine, vaccineName: e.target.value })}
-          />
-          <Input
-            label="접종 일자"
-            type="date"
-            value={newVaccine.date}
-            onChange={(e) => setNewVaccine({ ...newVaccine, date: e.target.value })}
-          />
-          <Button type="button" onClick={handleAddVaccination}>
-            백신 추가
-          </Button>
 
           <PageTitle>부모 개체 정보</PageTitle>
           <ParentCattleInfo parentCattle={parentCattle} onParentCattleChange={setParentCattle} />

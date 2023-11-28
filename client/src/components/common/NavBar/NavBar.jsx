@@ -101,7 +101,7 @@ const Navbar = () => {
             <a href="/registerCattle">가축등록</a>
           </MenuItem>
           <MenuItem isActive={pathname === '/control'}>
-            <a href="/control">가축거래</a>
+            <a href="/sale-cattle-list">가축거래</a>
           </MenuItem>
         </Menu>
         <User>

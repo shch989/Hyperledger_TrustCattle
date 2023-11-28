@@ -17,8 +17,8 @@ const CattleCard = (props) => {
   const dad = parentCattleID ? parentCattleID.dad : 'N/A';
   const vaccination = vaccinationRecord && vaccinationRecord.length > 0
     ? vaccinationRecord.length === 1
-      ? vaccinationRecord[0]
-      : vaccinationRecord[0] + "..."
+      ? vaccinationRecord[0].vaccineName
+      : vaccinationRecord[0].vaccineName + "..."
     : 'No vaccination record';
 
   const isAlive = survivalStatus === 'Alive';
@@ -28,7 +28,7 @@ const CattleCard = (props) => {
       <h2>가축 ID: {cattleID}</h2>
       <p>출생일: {birthDate}</p>
       <p>성별: {gender}</p>
-      <p>체중: {weight}</p>
+      <p>체중: {weight}kg</p>
       <p>접종기록: {vaccination}</p>
       <p>부모개체 ID: ( Male: {dad}, Female: {mom} )</p>
       <p>생사여부: {survivalStatus}</p>
