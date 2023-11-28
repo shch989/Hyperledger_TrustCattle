@@ -4,13 +4,23 @@ import MainBackground from '../../components/UI/MainBackground';
 import PageTitle from '../../components/UI/PageTitle';
 import Input from '../../components/UI/Input';
 import Button from '../../components/UI/Button';
-import VaccinationList from '../../components/cattle/VaccinationList';
 import ParentCattleInfo from '../../components/cattle/ParentCattleInfo';
 
 const InputBoxStyle = styled.div`
   width: 60%;
   margin: 0 auto 30px auto;
   padding: 20px 0;
+`;
+
+const VaccinationBox = styled.div`
+  margin: 30px 0;
+`;
+
+const StyledButton = styled.button`
+  width: 40px;
+  font-size: 12px;
+  height: 25px;
+  margin-left: 10px;
 `;
 
 const RegisterCattlePage = () => {
@@ -30,7 +40,20 @@ const RegisterCattlePage = () => {
   const handleAdminSubmit = async (event) => {
     event.preventDefault();
 
+    const parentCattleInfo = {
+      male: parentCattle.male.trim() === '' ? 'Unknown' : parentCattle.male.trim(),
+      female: parentCattle.female.trim() === '' ? 'Unknown' : parentCattle.female.trim(),
+    };
+
     alert(`등록되었습니다.`);
+    console.log(cattleId)
+    console.log(birthDate)
+    console.log(gender)
+    console.log(weight)
+    console.log(addedVaccinationHistory)
+    console.log(parentCattleInfo)
+
+
     setCattleId('');
     setBirthDate('');
     setGender('');
@@ -84,7 +107,18 @@ const RegisterCattlePage = () => {
           />
 
           <PageTitle>접종 이력</PageTitle>
-          <VaccinationList vaccinationHistory={addedVaccinationHistory} onRemoveVaccination={handleRemoveVaccination} />
+          <VaccinationBox>
+            <ul>
+              {addedVaccinationHistory.map((vaccine, index) => (
+                <li key={index}>
+                  <strong>백신 이름:</strong> {vaccine.vaccineName}, <strong>접종 일자:</strong> {vaccine.date}
+                  <StyledButton type="button" onClick={() => handleRemoveVaccination(index)}>
+                    삭제
+                  </StyledButton>
+                </li>
+              ))}
+            </ul>
+          </VaccinationBox>
           <Input
             label="백신 이름"
             type="text"
@@ -104,7 +138,7 @@ const RegisterCattlePage = () => {
           <PageTitle>부모 개체 정보</PageTitle>
           <ParentCattleInfo parentCattle={parentCattle} onParentCattleChange={setParentCattle} />
 
-          <Button>등록하기</Button>
+          <Button type="submit">등록하기</Button>
         </form>
       </InputBoxStyle>
     </MainBackground>

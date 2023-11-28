@@ -5,7 +5,7 @@ import { TransactionService } from './transaction.service';
 export class TransactionController {
   constructor(private readonly transactionService: TransactionService) { }
 
-  @Post('purchase-request')
+  @Post('purchase-request/:cattleId/:buyerId')
   async purchaseRequest(
     @Param('cattleId') cattleId: string,
     @Param('buyerId') buyerId: string,
