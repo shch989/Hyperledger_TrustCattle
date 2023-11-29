@@ -15,6 +15,14 @@ npm install fabric-network
 ```
 npm install fabric-ca-client
 ```
+### class-validator 모듈 설치
+```
+npm install class-validator
+```
+### class-transformer 모듈 설치
+```
+npm install class-transformer
+```
 
 <br/>
 

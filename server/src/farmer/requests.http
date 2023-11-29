@@ -1,0 +1,12 @@
+### 자산 추가 POST
+POST http://localhost:5000/farmer/signup
+Content-Type: application/json
+
+{
+  "userId": "user3",
+  "name": "조성현",
+  "number": "01011111111",
+  "email": "busan@naver.com",
+  "password": "0000",
+  "address": "부산"
+}

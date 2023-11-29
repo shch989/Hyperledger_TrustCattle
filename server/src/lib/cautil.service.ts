@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import * as FabricCAServices from 'fabric-ca-client';
-import { Wallet } from 'fabric-network';
+import { Wallet, X509Identity } from 'fabric-network';
 import { AppUtilsService } from './apputil.service';
+import { FarmerRequestDto } from 'src/farmer/dtos/FarmerRequest.dto';
 
 @Injectable()
 export class CAUtilsService {
-  constructor(private readonly appUtilsService: AppUtilsService) {}
+  constructor(private readonly appUtilsService: AppUtilsService) { }
   private readonly ccp = this.appUtilsService.buildCCPOrg1()
   private readonly adminUserId = 'admin';
   private readonly caHostName = 'ca.org1.example.com'
@@ -54,20 +55,20 @@ export class CAUtilsService {
     caClient: FabricCAServices,
     wallet: Wallet,
     orgMspId: string,
-    userId: string,
     affiliation: string,
+    userdata: FarmerRequestDto
   ): Promise<void> {
     try {
-      const userIdentity = await wallet.get(userId);
+      const userIdentity = await wallet.get(userdata.userId);
       if (userIdentity) {
-        console.log(`An identity for the user ${userId} already exists in the wallet`);
-        throw new Error(`An identity for the user ${userId} already exists in the wallet`);
+        console.log(`An identity for the user ${userdata.userId} already exists in the wallet`);
+        throw new Error(`An identity for the user ${userdata.userId} already exists in the wallet`);
       }
 
       const adminIdentity = await wallet.get(this.adminUserId);
       if (!adminIdentity) {
-        console.log(`An identity for the user ${userId} already exists in the wallet`);
-        throw new Error(`An identity for the user ${userId} already exists in the wallet`);
+        console.log(`An identity for the admin user does not exist in the wallet`);
+        throw new Error(`An identity for the admin user does not exist in the wallet`);
       }
 
       const provider = wallet.getProviderRegistry().getProvider(adminIdentity.type);
@@ -76,18 +77,18 @@ export class CAUtilsService {
       const secret = await caClient.register(
         {
           affiliation: affiliation,
-          enrollmentID: userId,
+          enrollmentID: userdata.userId,
           role: "client",
         },
         adminUser,
       );
 
       const enrollment = await caClient.enroll({
-        enrollmentID: userId,
+        enrollmentID: userdata.userId,
         enrollmentSecret: secret,
       });
 
-      const x509Identity = {
+      const x509Identity: X509Identity = {
         credentials: {
           certificate: enrollment.certificate,
           privateKey: enrollment.key.toBytes(),
@@ -96,8 +97,10 @@ export class CAUtilsService {
         type: "X.509",
       };
 
-      await wallet.put(userId, x509Identity);
-      console.log(`Successfully registered and enrolled user ${userId} and imported it into the wallet`);
+      // Store the user details in the wallet (or your database)
+      await wallet.put(userdata.userId, x509Identity);
+
+      console.log(`Successfully registered and enrolled user ${userdata.userId} and imported it into the wallet`);
     } catch (error) {
       console.error(`Failed to register user: ${error}`);
       throw new Error(error);

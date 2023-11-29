@@ -1,0 +1,8 @@
+### 관리자 추가 POST
+POST http://localhost:5000/admin
+Content-Type: application/json
+
+{
+  "adminid": "admin",
+  "adminpw": "adminpw"
+}
