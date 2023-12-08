@@ -3,7 +3,7 @@ POST http://localhost:5000/farmer/signup
 Content-Type: application/json
 
 {
-  "userId": "user3",
+  "userId": "farmer1",
   "name": "조성현",
   "number": "01011111111",
   "email": "busan@naver.com",

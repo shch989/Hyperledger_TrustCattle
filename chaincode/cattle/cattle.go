@@ -21,19 +21,12 @@ type CattleParens struct {
 	Mom string `json:"mom"`
 }
 
-// VaccinationRecord 정의
-type VaccinationRecord struct {
-	VaccinID   string `json:"vaccinId"`
-	Vaccindate string `json:"vaccindate"`
-}
-
 // Cattle 정의
 type Cattle struct {
 	CattleID           string              `json:"cattleId"`
 	Birthdate          string              `json:"birthdate"`
 	Gender             string              `json:"gender"`
 	Weight             string              `json:"weight"`
-	VaccinationHistory []VaccinationRecord `json:"vaccinationHistory"`
 	ParentsID          CattleParens        `json:"parentsId"`
 	Owner              string              `json:"owner"`
 	State              string              `json:"state"`
@@ -49,7 +42,7 @@ type HistoryQueryResult struct {
 }
 
 // CreateCattle 함수 정의
-func (s *SmartContract) CreateCattle(ctx contractapi.TransactionContextInterface, cattleId, birthdate, gender, weight string, vaccinations []VaccinationRecord, dad, mom, owner string) error {
+func (s *SmartContract) CreateCattle(ctx contractapi.TransactionContextInterface, cattleId, birthdate, gender, weight string, dad, mom, owner string) error {
 	// 중복 확인
 	cattleJSON, err := ctx.GetStub().GetState(cattleId)
 	if err != nil {
@@ -71,7 +64,6 @@ func (s *SmartContract) CreateCattle(ctx contractapi.TransactionContextInterface
 		Birthdate:          birthdate,
 		Gender:             gender,
 		Weight:             weight,
-		VaccinationHistory: vaccinations,
 		ParentsID:          parentsID,
 		Owner:              owner,
 		State:              "breeding",

@@ -1,14 +1,25 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseInterceptors } from '@nestjs/common';
 import { CattleService } from './cattle.service';
+import { CattleRequestDto } from './dtos/CattleRequest.dto';
+import { SuccessInterceptor } from 'src/common/interceptors/success.interceptor';
+import { GetCattleRequestDto } from './dtos/GetCattleRequest.dto';
 
 @Controller('cattle')
+@UseInterceptors(new SuccessInterceptor())
 export class CattleController {
   constructor(private readonly cattleService: CattleService) { }
 
   @Post('register')
-  async registerCattle(@Body() body: any) {
+  async registerCattle(@Body() cattleData: CattleRequestDto) {
     // 가축 등록
-    const result = await this.cattleService.registerCattle(body)
+    const result = await this.cattleService.registerCattle(cattleData)
+    return result
+  }
+
+  @Post('findcattle')
+  async findCattles(@Body() findData: GetCattleRequestDto) {
+    // 가축 등록
+    const result = await this.cattleService.findCattles(findData)
     return result
   }
 

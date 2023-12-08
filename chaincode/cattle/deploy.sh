@@ -67,7 +67,7 @@ peer lifecycle chaincode commit -o localhost:7050 --ordererTLSHostnameOverride o
 sleep 3
 
 # TEST - TRANSFER
-peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA  --peerAddresses localhost:7051 --tlsRootCertFiles $PEER0_ORG1_CA --peerAddresses localhost:9051 --tlsRootCertFiles $PEER0_ORG2_CA -C ${CHANNEL_NAME} -n ${CHAINCODE_NAME} -c '{"Args":["CreateCattle", "C101", "2017-12-01", "male", "120", '[{"VaccinID": "V101", "Vaccindate": "2023-01-01"}, {"VaccinID": "V102", "Vaccindate": "2023-02-01"}]', "Dad123", "Mom456", "Owner789"]}'
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA  --peerAddresses localhost:7051 --tlsRootCertFiles $PEER0_ORG1_CA --peerAddresses localhost:9051 --tlsRootCertFiles $PEER0_ORG2_CA -C ${CHANNEL_NAME} -n ${CHAINCODE_NAME} -c '{"Args":["CreateCattle", "C101", "2017-12-01", "male", "120", "Dad123", "Mom456", "Owner789"]}'
 
 sleep 3
 
