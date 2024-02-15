@@ -10,6 +10,6 @@ fi
 
 rm -rf config/*
 
-rm -rf ../application/server/src/config/connection-org1.json
+rm -rf ../application/server/src/config/connection-org2.json
 
 rm -rf ../application/server/src/wallet

@@ -56,6 +56,26 @@ Organizations:
         Rule: "OR('Org2MSP.peer')"
     AnchorPeers:
       - HOST: peer0.org2.example.com
+        PORT: 8051
+  - &Org3
+    Name: Org3MSP
+    ID: Org3MSP
+    MSPDir: ./organizations/peerOrganizations/org3.example.com/msp
+    Policies:
+      Readers:
+        Type: Signature
+        Rule: "OR('Org3MSP.admin', 'Org3MSP.peer', 'Org3MSP.client')"
+      Writers:
+        Type: Signature
+        Rule: "OR('Org3MSP.admin', 'Org3MSP.client')"
+      Admins:
+        Type: Signature
+        Rule: "OR('Org3MSP.admin')"
+      Endorsement:
+        Type: Signature
+        Rule: "OR('Org3MSP.peer')"
+    AnchorPeers:
+      - HOST: peer0.org3.example.com
         PORT: 9051
 
 Capabilities:
@@ -135,7 +155,7 @@ Channel: &ChannelDefaults
     <<: *ChannelCapabilities
 
 Profiles:
-  TwoOrgsOrdererGenesis:
+  ThreeOrgsOrdererGenesis:
     <<: *ChannelDefaults
     Orderer:
       <<: *OrdererDefaults
@@ -148,8 +168,9 @@ Profiles:
         Organizations:
           - *Org1
           - *Org2
+          - *Org3
     
-  CattleOrgsChannel:
+  ChickenOrgsChannel:
     Consortium: SampleConsortium
     <<: *ChannelDefaults
     Application:
@@ -159,4 +180,16 @@ Profiles:
         - *Org2
       Capabilities:
         <<: *ApplicationCapabilities
+
+  EggOrgsChannel:
+    Consortium: SampleConsortium
+    <<: *ChannelDefaults
+    Application:
+      <<: *ApplicationDefaults
+      Organizations:
+        - *Org2
+        - *Org3
+      Capabilities:
+        <<: *ApplicationCapabilities
+
 

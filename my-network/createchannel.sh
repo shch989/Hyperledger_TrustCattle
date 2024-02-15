@@ -2,7 +2,8 @@
 
 export FABRIC_CFG_PATH=$PWD
 
-CHANNEL_NAME="cattlechannel"
+CHANNEL_NAME="chickenchannel"
+ECHANNEL_NAME="eggchannel"
 
 set -e
 
@@ -17,22 +18,27 @@ function setOrg {
         export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
         export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
         export CORE_PEER_ADDRESS=localhost:7051
-    else
+    elif [ $ORG -eq 2 ]; then
         export CORE_PEER_LOCALMSPID="Org2MSP"
         export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
         export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
-        export CORE_PEER_ADDRESS=localhost:9051
+        export CORE_PEER_ADDRESS=localhost:8051
+    else 
+        export CORE_PEER_LOCALMSPID="Org3MSP"
+        export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/tls/ca.crt
+        export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp
+        export CORE_PEER_ADDRESS=localhost:9051        
     fi
 }
 
-# 채널 트랜젝션, 앵커 트랜젝션 생성
+# 치킨 채널 트랜젝션, 앵커 트랜젝션 생성
 echo "--- Create Channel Transactions" 
 set -x
-configtxgen -profile CattleOrgsChannel -outputCreateChannelTx ./config/${CHANNEL_NAME}.tx -channelID $CHANNEL_NAME
+configtxgen -profile ChickenOrgsChannel -outputCreateChannelTx ./config/${CHANNEL_NAME}.tx -channelID $CHANNEL_NAME
 
-configtxgen -profile CattleOrgsChannel -outputAnchorPeersUpdate ./config/AnchorOrg1.tx -asOrg Org1MSP -channelID $CHANNEL_NAME
+configtxgen -profile ChickenOrgsChannel -outputAnchorPeersUpdate ./config/AnchorOrg1.tx -asOrg Org1MSP -channelID $CHANNEL_NAME
 
-configtxgen -profile CattleOrgsChannel -outputAnchorPeersUpdate ./config/AnchorOrg2.tx -asOrg Org2MSP -channelID $CHANNEL_NAME
+configtxgen -profile ChickenOrgsChannel -outputAnchorPeersUpdate ./config/AnchorOrg2.tx -asOrg Org2MSP -channelID $CHANNEL_NAME
 set +x
 
 # ## 채널 생성
@@ -59,17 +65,68 @@ peer channel join -b ./config/${CHANNEL_NAME}.block
 set +x
 
 # ## 채널 업데이트
-# org1 ->앵커.tx -> peer channel update
+# org2 ->앵커.tx -> peer channel update
 echo "--- org2 channel update"
 set -x
 peer channel update -f ./config/AnchorOrg2.tx -o localhost:7050 -c $CHANNEL_NAME --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA
 set +x
 sleep 3
 
-# org2 ->앵커.tx -> peer channel update
+# org1 ->앵커.tx -> peer channel update
 echo "--- org1 channel update"
 setOrg 1
 set -x
 peer channel update -f ./config/AnchorOrg1.tx -o localhost:7050 -c $CHANNEL_NAME --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA
+set +x
+sleep 3
+
+CHANNEL_NAME=$ECHANNEL_NAME
+
+# 에그 채널 트랜젝션, 앵커 트랜젝션 생성
+echo "--- Create Channel Transactions" 
+set -x
+configtxgen -profile EggOrgsChannel -outputCreateChannelTx ./config/${CHANNEL_NAME}.tx -channelID $CHANNEL_NAME
+
+configtxgen -profile EggOrgsChannel -outputAnchorPeersUpdate ./config/EggAnchorOrg2.tx -asOrg Org2MSP -channelID $CHANNEL_NAME
+
+configtxgen -profile EggOrgsChannel -outputAnchorPeersUpdate ./config/EggAnchorOrg3.tx -asOrg Org3MSP -channelID $CHANNEL_NAME
+set +x
+
+# ## 채널 생성
+setOrg 2
+set -x
+peer channel create -o localhost:7050 -c $CHANNEL_NAME --ordererTLSHostnameOverride orderer.example.com -f ./config/${CHANNEL_NAME}.tx --outputBlock ./config/${CHANNEL_NAME}.block --tls --cafile $ORDERER_CA
+set +x
+
+sleep 3
+
+# org2접속 환경변수 세팅 -> 채널이름.tx -> 채널이름.block
+# ## 채널 조인
+# org2 -> 채널이름.block -> peer channel join
+echo "--- org2 channel join"
+set -x
+peer channel join -b ./config/${CHANNEL_NAME}.block
+set +x
+
+# org3 -> 채널이름.block -> peer channel join
+echo "--- org3 channel join"
+setOrg 3
+set -x
+peer channel join -b ./config/${CHANNEL_NAME}.block
+set +x
+
+# ## 채널 업데이트
+# org3 ->앵커.tx -> peer channel update
+echo "--- org3 channel update"
+set -x
+peer channel update -f ./config/EggAnchorOrg3.tx -o localhost:7050 -c $CHANNEL_NAME --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA
+set +x
+sleep 3
+
+# org2 ->앵커.tx -> peer channel update
+echo "--- org2 channel update"
+setOrg 2
+set -x
+peer channel update -f ./config/EggAnchorOrg2.tx -o localhost:7050 -c $CHANNEL_NAME --ordererTLSHostnameOverride orderer.example.com --tls --cafile $ORDERER_CA
 set +x
 sleep 3
