@@ -2,15 +2,14 @@ import { Injectable } from '@nestjs/common';
 import * as FabricCAServices from 'fabric-ca-client';
 import { Wallet, X509Identity } from 'fabric-network';
 import { AppUtilsService } from './apputil.service';
-import { FarmerRequestDto } from 'src/farmer/dtos/FarmerRequest.dto';
 
 @Injectable()
 export class CAUtilsService {
   constructor(private readonly appUtilsService: AppUtilsService) { }
-  private readonly ccp = this.appUtilsService.buildCCPOrg1()
+  private readonly ccp = this.appUtilsService.buildCCPOrg2()
   private readonly adminUserId = 'admin';
-  private readonly caHostName = 'ca.org1.example.com'
-  private readonly mspOrg1 = 'Org1MSP'
+  private readonly caHostName = 'ca.org2.example.com'
+  private readonly mspOrg2 = 'Org2MSP'
 
   buildCAClient(): FabricCAServices {
     const caInfo = this.ccp.certificateAuthorities[this.caHostName];
@@ -21,8 +20,9 @@ export class CAUtilsService {
     return caClient;
   }
 
-  async enrollAdmin(caClient: FabricCAServices, wallet: Wallet, adminId: string, adminPasswd: string): Promise<void> {
+  async enrollAdmin(caClient: FabricCAServices, wallet: Wallet, adminId: string, adminPw: string): Promise<void> {
     try {
+      console.log(caClient, wallet, this.mspOrg2, adminId, adminPw)
       if (adminId != this.adminUserId) {
         throw new Error('Admin ID does not match.');
       }
@@ -30,39 +30,38 @@ export class CAUtilsService {
       const identity = await wallet.get(this.adminUserId);
       if (identity) {
         console.log("An identity for the admin user already exists in the wallet");
-        return;
+        throw new Error("An identity for the admin user already exists in the wallet")
       }
 
-      const enrollment = await caClient.enroll({ enrollmentID: adminId, enrollmentSecret: adminPasswd });
+      const enrollment = await caClient.enroll({ enrollmentID: adminId, enrollmentSecret: adminPw });
       const x509Identity = {
         credentials: {
           certificate: enrollment.certificate,
           privateKey: enrollment.key.toBytes(),
         },
-        mspId: this.mspOrg1,
+        mspId: this.mspOrg2,
         type: "X.509",
       };
 
-      await wallet.put(this.adminUserId, x509Identity);
+      await wallet.put(adminId, x509Identity);
       console.log("Successfully enrolled admin user and imported it into the wallet");
     } catch (error) {
       console.error(`Failed to enroll admin user - ${error}`);
-      throw new Error(error);
+      throw new Error(`Failed to enroll admin user - ${error}`);
     }
   }
 
   async registerAndEnrollUser(
     caClient: FabricCAServices,
     wallet: Wallet,
-    orgMspId: string,
+    userId: string,
     affiliation: string,
-    userdata: FarmerRequestDto
   ): Promise<void> {
     try {
-      const userIdentity = await wallet.get(userdata.userId);
+      const userIdentity = await wallet.get(userId);
       if (userIdentity) {
-        console.log(`An identity for the user ${userdata.userId} already exists in the wallet`);
-        throw new Error(`An identity for the user ${userdata.userId} already exists in the wallet`);
+        console.log(`An identity for the user ${userId} already exists in the wallet`);
+        throw new Error(`An identity for the user ${userId} already exists in the wallet`);
       }
 
       const adminIdentity = await wallet.get(this.adminUserId);
@@ -77,14 +76,14 @@ export class CAUtilsService {
       const secret = await caClient.register(
         {
           affiliation: affiliation,
-          enrollmentID: userdata.userId,
+          enrollmentID: userId,
           role: "client",
         },
         adminUser,
       );
 
       const enrollment = await caClient.enroll({
-        enrollmentID: userdata.userId,
+        enrollmentID: userId,
         enrollmentSecret: secret,
       });
 
@@ -93,17 +92,17 @@ export class CAUtilsService {
           certificate: enrollment.certificate,
           privateKey: enrollment.key.toBytes(),
         },
-        mspId: orgMspId,
+        mspId: this.mspOrg2,
         type: "X.509",
       };
 
       // Store the user details in the wallet (or your database)
-      await wallet.put(userdata.userId, x509Identity);
+      await wallet.put(userId, x509Identity);
 
-      console.log(`Successfully registered and enrolled user ${userdata.userId} and imported it into the wallet`);
+      console.log(`Successfully registered and enrolled user ${userId} and imported it into the wallet`);
     } catch (error) {
       console.error(`Failed to register user: ${error}`);
-      throw new Error(error);
+      throw new Error(`Failed to register user: ${error}`);
     }
   }
 }

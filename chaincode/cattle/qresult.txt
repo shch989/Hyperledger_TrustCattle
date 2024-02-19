@@ -1,2 +1,0 @@
-Installed chaincodes on peer:
-Package ID: cattle_1.0:32699876bbd90499379c8be5e2e457f8981a4b46f18777b23acb1d6915b6affb, Label: cattle_1.0

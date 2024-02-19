@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet Prototype</title>
+
+    <!-- 부트스트랩 포함 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <!-- jqeury 포함 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+</head>
+<style>
+    p {
+        color : #FDE5D4;
+    };
+    label {
+        color : #FDE5D4;
+    }
+</style>
+<body style="background-color: #001524; color: #FDE5D4;">
+    <div class="contrainer">
+    <!-- 해더, nav바 -->
+        <div class="container-md">
+            <br>
+            <h1 style="color:#FDE5D4; ">관리자 지갑 </h1>
+            <br>
+        </div>
+    <!-- 컨텐츠 -->
+        <div class="container-md">
+            <!-- id, pw 입력폼 -->
+            <label for="adminid" class="form-label">관리자ID : </label><br>
+            <input type="text" class="form-control" id="adminid"><br><br>
+            <label for="adminpw" class="form-label">관리자PW : </label><br>
+            <input type="password" class="form-control" id="adminpw"><br><br>
+
+            <button class="btn btn-light" id="admin-btn">관리자인증서생성</button>
+            &nbsp;&nbsp;
+            <a href="/" class="btn btn-light">돌아가기</a>
+            <br><br>
+            <p id="admin-result"></p>
+            <br><br>
+        </div>
+        <div class="container-md">
+            <br>
+            <h1 style="color:#FDE5D4; ">사용자 지갑 </h1>
+            <br>
+        </div>
+        <!-- 컨텐츠 -->
+        <div class="container-md">
+            <!-- id, pw 입력폼 -->
+            <label for="userid" class="form-label">사용자ID : </label><br>
+            <input type="text" class="form-control" id="userid"><br><br>
+            <label for="affiliation" class="form-label">사용자부서 : </label><br>
+            <input type="text" class="form-control" id="affiliation"><br><br>
+
+            <button class="btn btn-light" id="user-btn">사용자인증서생성</button>
+            &nbsp;&nbsp;
+            <a href="/" class="btn btn-light">돌아가기</a>
+            <br><br>
+            
+        </div>
+        <div class="container-md" id="user-result">
+
+        </div>
+    <!-- 푸터 -->
+        <div class="container-md">
+
+        </div>
+    </div>
+    
+</body>
+<script>
+    $("#admin-btn").click( function(){
+        const aid = $("#adminid").val();
+        const apw = $("#adminpw").val();
+
+        $.post('/admin', {adminid:aid, adminpw:apw}, function(data, status){
+
+            $("#admin-result").empty();
+            $("#admin-result").append("RESULT: "+data.result+"<br>");
+            if (data.result == 'success') {
+                $("#admin-result").append("MESSAGE: "+ data.message+"<br>");
+            }else{
+                $("#admin-result").append("ERROR: "+ data.error+"<br>");
+            }
+        })
+    });
+
+    $("#user-btn").click(function () {
+        const UID = $("#userid").val();
+        const affiliation = $("#affiliation").val();
+
+        console.log("user gen button clicked : ", UID, affiliation);
+
+        $.post('/user', { userid: UID, affiliation: affiliation }, function (data, status) {
+
+            $("#user-result").empty();
+
+            var html_table = '<table class="table table-hover"><thead><tr><th scope="col" width="30%">&nbsp</th><th scope="col" width="70%">VALUE</th></tr></thead>';
+            
+            html_table +=`<tbody><tr><th>RESULT</td><td>${data.result}</td></tr>`;
+
+            if (data.result == 'success') {
+                html_table += `<tr><th>MESSAGE</td><td>${data.message}</td></tr></tbody></table>`;
+            } else {
+                html_table +=`<tr><th>ERROR</td><td>${data.error}</td></tr></tbody></table>`;
+            }
+
+            $("#user-result").append(html_table);
+
+        })
+    });
+    
+</script>
+</html>

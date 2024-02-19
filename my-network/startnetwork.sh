@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 환경설정
-set -xe
+set -e
 # configtx.yaml 이 있는 디렉토리를 FABRIC_CFG_PATH로 설정
 export FABRIC_CFG_PATH=${PWD}
 
@@ -24,7 +24,6 @@ if [ ! -d organizations/fabric-ca ]; then
 fi
 
 # docker network 시작 - ca
-
 echo "---Generating certificates using fabric ca"
 set -x
 docker-compose -f docker-compose.yaml up -d ca_org1 ca_org2 ca_org3 ca_orderer
@@ -35,15 +34,11 @@ sleep 3
 # register enroll 쉘스크립트 수행
 . registerenroll.sh
 
+
 createOrg1
-
 createOrg2
-
 createOrg3
-
 createOrderer
-
-
 
 echo "--- Generating Orderer Genesis block"
 set -x
@@ -55,7 +50,7 @@ set +x
 sleep 5
 
 echo "--- ccp generation "
-./ccp-generate.sh
+./ccp-generate.sh #org2 -> connection-org2.json
 
 if [ ! -d ../application/server/src/config ]; then
     mkdir ../application/server/src/config

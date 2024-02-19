@@ -3,6 +3,6 @@ POST http://localhost:5000/admin
 Content-Type: application/json
 
 {
-  "adminid": "admin",
-  "adminpw": "busancapw1"
+  "adminId": "admin",
+  "adminPw": "busancapw2"
 }

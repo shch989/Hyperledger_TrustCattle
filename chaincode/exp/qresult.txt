@@ -1,0 +1,2 @@
+Installed chaincodes on peer:
+Package ID: exp_1.0:50c9df875be09fdb7e7d0914bc6eea8f5d10742e1bcc0efe210113ea17ea44c8, Label: exp_1.0

@@ -170,7 +170,7 @@ Profiles:
           - *Org2
           - *Org3
     
-  ChickenOrgsChannel:
+  ToyOrgsChannel:
     Consortium: SampleConsortium
     <<: *ChannelDefaults
     Application:
@@ -181,7 +181,7 @@ Profiles:
       Capabilities:
         <<: *ApplicationCapabilities
 
-  EggOrgsChannel:
+  CafeOrgsChannel:
     Consortium: SampleConsortium
     <<: *ChannelDefaults
     Application:
@@ -191,5 +191,4 @@ Profiles:
         - *Org3
       Capabilities:
         <<: *ApplicationCapabilities
-
 

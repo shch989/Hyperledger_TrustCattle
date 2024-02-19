@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I-BANG Prototype</title>
+
+    <!-- 부트스트랩 포함 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+    <!-- jqeury 포함 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+</head>
+<style>
+    p {
+        color: #FDE5D4;
+    }
+
+    ;
+
+    label {
+        color: #FDE5D4;
+    }
+</style>
+
+<body style="background-color: #001524; color: #FDE5D4;">
+    <div class="contrainer">
+        <center>
+            <!-- 해더, nav바 -->
+            <div class="container-md">
+                <br>
+                <h1 style="color:#FDE5D4; "> 체험이벤트 조회 </h1>
+                <br>
+            </div>
+            <!-- 컨텐츠 -->
+            <div class="container-md" style="width:80%">
+                <!-- id, pw 입력폼 -->
+                <label for="q_cert" class="form-ltabel">인증서 : </label><br>
+                <input type="text" class="form-control" id="q_cert"><br>
+                <label for="q_eid" class="form-label">체험이벤트 ID : </label><br>
+                <input type="text" class="form-control" id="q_eid"><br>
+
+                <button class="btn btn-light" id="query-btn">체험이벤트조회</button>
+                &nbsp;&nbsp;
+                <button class="btn btn-light" id="history-btn">이력조회</button>
+                &nbsp;&nbsp;
+                <a href="/" class="btn btn-light">돌아가기</a>
+                <br><br>
+            </div>
+            <div class="container-md" id="query-result">
+
+            </div>
+            <!-- 푸터 -->
+            <div class="container-md">
+                <br><br>
+
+            </div>
+        </center>
+    </div>
+</body>
+<script>
+    $("#query-btn").click(function () {
+        const q_cert = $("#q_cert").val();
+        const q_eid = $("#q_eid").val();
+
+        console.log("experience query button clicked : ", q_cert, q_eid);
+
+        $.get('/experience', { q_cert, q_eid }, function (data, status) {
+
+            console.log(data.message)
+            $("#query-result").empty();
+
+            var html_table = '<table class="table table-hover"><thead><tr><th scope="col" width="30%">&nbsp</th><th scope="col" width="70%">VALUE</th></tr></thead>';
+
+            html_table += `<tbody><tr><th>RESULT</td><td>${data.result}</td></tr>`;
+
+            if (data.result == 'success') {
+                html_table += `<tr><th>MESSAGE</td><td>${JSON.stringify(data.message)}</td></tr></tbody></table>`;
+            } else {
+                html_table += `<tr><th>ERROR</td><td>${data.error}</td></tr></tbody></table>`;
+            }
+
+            $("#query-result").append(html_table);
+
+        })
+    });
+
+    // 이력버튼이 클릭되었을 때
+    $("#history-btn").click(function () {
+        const q_cert = $("#q_cert").val();
+        const q_eid = $("#q_eid").val();
+
+        console.log("experience history button clicked : ", q_cert, q_eid);
+
+        $.get('/experience/history', { h_cert: q_cert, h_id: q_eid }, function (data, status) {
+
+            console.log(data.message)
+            $("#query-result").empty();
+
+            var html_table = '<table class="table table-hover" width="100%"><thead><tr><th scope="col" width="30%">&nbsp</th><th scope="col" width="70%">VALUE</th></tr></thead>';
+
+            html_table += `<tbody><tr><th>RESULT</td><td>${data.result}</td></tr>`;
+
+            if (data.result == 'success') {
+                html_table += `<tr><th>MESSAGE</td><td>`;
+                    // 반복문으로 data 를 보여주기
+                    for( i=0 ; i< data.message.length ; i++)
+                    {
+                        html_table += `<b>${i}번째 transaction</b><br>`
+                        html_table += `txid : ${data.message[i].txId}<br>`
+                        html_table += `record : ${JSON.stringify(data.message[i].record)}<br>`
+                        html_table += `timestamp : ${data.message[i].timestamp}<br>`
+                        html_table += `isdelete : ${data.message[i].isDelete}<br>`
+
+                    }
+                html_table += `</td></tr></tbody></table>`;
+            } else {
+                html_table += `<tr><th>ERROR</td><td>${data.error}</td></tr></tbody></table>`;
+            }
+
+            $("#query-result").append(html_table);
+
+        })
+    });
+
+</script>
+
+</html>

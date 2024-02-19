@@ -5,10 +5,10 @@ import * as path from 'path';
 
 @Injectable()
 export class AppUtilsService {
-  private readonly ccpPath = path.resolve('..', 'server', 'src', 'config', 'connection-org1.json');
+  private readonly ccpPath = path.resolve('..', 'server', 'src', 'config', 'connection-org2.json');
   private readonly walletPath = path.join('..', 'server', 'src', 'wallet')
 
-  buildCCPOrg1(): any {
+  buildCCPOrg2(): any {
     const fileExists = fs.existsSync(this.ccpPath);
     if (!fileExists) {
       throw new Error(`no such file or directory: ${this.ccpPath}`);

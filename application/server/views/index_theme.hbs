@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Theme Made By www.w3schools.com -->
+    <title>I-BANG Prototype</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            font: 400 15px Lato, sans-serif;
+            line-height: 1.8;
+            color: #818181;
+        }
+
+        h2 {
+            font-size: 24px;
+            text-transform: uppercase;
+            color: #303030;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        h4 {
+            font-size: 19px;
+            line-height: 1.375em;
+            color: #303030;
+            font-weight: 400;
+            margin-bottom: 30px;
+        }
+
+        .jumbotron {
+            background-color: #f4511e;
+            color: #fff;
+            padding: 100px 25px;
+            font-family: Montserrat, sans-serif;
+        }
+
+        .container-fluid {
+            padding: 60px 50px;
+        }
+
+        .bg-grey {
+            background-color: #f6f6f6;
+        }
+
+        .logo-small {
+            color: #f4511e;
+            font-size: 50px;
+        }
+
+        .logo {
+            color: #f4511e;
+            font-size: 200px;
+        }
+
+        .thumbnail {
+            padding: 0 0 15px 0;
+            border: none;
+            border-radius: 0;
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            margin-bottom: 10px;
+        }
+
+        .carousel-control.right,
+        .carousel-control.left {
+            background-image: none;
+            color: #f4511e;
+        }
+
+        .carousel-indicators li {
+            border-color: #f4511e;
+        }
+
+        .carousel-indicators li.active {
+            background-color: #f4511e;
+        }
+
+        .item h4 {
+            font-size: 19px;
+            line-height: 1.375em;
+            font-weight: 400;
+            font-style: italic;
+            margin: 70px 0;
+        }
+
+        .item span {
+            font-style: normal;
+        }
+
+        .panel {
+            border: 1px solid #f4511e;
+            border-radius: 0 !important;
+            transition: box-shadow 0.5s;
+        }
+
+        .panel:hover {
+            box-shadow: 5px 0px 40px rgba(0, 0, 0, .2);
+        }
+
+        .panel-footer .btn:hover {
+            border: 1px solid #f4511e;
+            background-color: #fff !important;
+            color: #f4511e;
+        }
+
+        .panel-heading {
+            color: #fff !important;
+            background-color: #f4511e !important;
+            padding: 25px;
+            border-bottom: 1px solid transparent;
+            border-top-left-radius: 0px;
+            border-top-right-radius: 0px;
+            border-bottom-left-radius: 0px;
+            border-bottom-right-radius: 0px;
+        }
+
+        .panel-footer {
+            background-color: white !important;
+        }
+
+        .panel-footer h3 {
+            font-size: 32px;
+        }
+
+        .panel-footer h4 {
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        .panel-footer .btn {
+            margin: 15px 0;
+            background-color: #f4511e;
+            color: #fff;
+        }
+
+        .navbar {
+            margin-bottom: 0;
+            background-color: #f4511e;
+            z-index: 9999;
+            border: 0;
+            font-size: 12px !important;
+            line-height: 1.42857143 !important;
+            letter-spacing: 4px;
+            border-radius: 0;
+            font-family: Montserrat, sans-serif;
+        }
+
+        .navbar li a,
+        .navbar .navbar-brand {
+            color: #fff !important;
+        }
+
+        .navbar-nav li a:hover,
+        .navbar-nav li.active a {
+            color: #f4511e !important;
+            background-color: #fff !important;
+        }
+
+        .navbar-default .navbar-toggle {
+            border-color: transparent;
+            color: #fff !important;
+        }
+
+        footer .glyphicon {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #f4511e;
+        }
+
+        .slideanim {
+            visibility: hidden;
+        }
+
+        .slide {
+            animation-name: slide;
+            -webkit-animation-name: slide;
+            animation-duration: 1s;
+            -webkit-animation-duration: 1s;
+            visibility: visible;
+        }
+
+        @keyframes slide {
+            0% {
+                opacity: 0;
+                transform: translateY(70%);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0%);
+            }
+        }
+
+        @-webkit-keyframes slide {
+            0% {
+                opacity: 0;
+                -webkit-transform: translateY(70%);
+            }
+
+            100% {
+                opacity: 1;
+                -webkit-transform: translateY(0%);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .col-sm-4 {
+                text-align: center;
+                margin: 25px 0;
+            }
+
+            .btn-lg {
+                width: 100%;
+                margin-bottom: 35px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .logo {
+                font-size: 150px;
+            }
+        }
+    </style>
+</head>
+
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#myPage">I-BANG</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#about">ABOUT</a></li>
+                    <li><a href="#wallet">WALLET</a></li>
+                    <li><a href="#services">SERVICES</a></li>
+                    <li><a href="#records" class="disabled">RECORDS</a></li>
+                    <li><a href="#contact">CONTACT</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="jumbotron text-center">
+        <h1>I-BANG Service</h1>
+        <p>아이방에서 제공하는 체험서비스 프로토타입 구독 </p>
+        <form>
+            <div class="input-group">
+                <input type="email" class="form-control" size="50" placeholder="Email Address" required>
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-danger">Subscribe</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Container (About Section) -->
+    <div id="about" class="container-fluid">
+        <div class="row">
+            <div class="col-sm-8">
+                <h2>About Company Page</h2><br>
+                <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat.</h4><br>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                    officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <br><button class="btn btn-default btn-lg">Get in Touch</button>
+            </div>
+            <div class="col-sm-4">
+                <span class="glyphicon glyphicon-signal logo"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid bg-grey">
+        <div class="row">
+            <div class="col-sm-4">
+                <span class="glyphicon glyphicon-globe logo slideanim"></span>
+            </div>
+            <div class="col-sm-8">
+                <h2>Our Values</h2><br>
+                <h4><strong>MISSION:</strong> Our mission lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h4><br>
+                <p><strong>VISION:</strong> Our vision Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                    eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Container (Services Section) -->
+    <div id="wallet" class="container-fluid text-center">
+        <h2>WELLET</h2>
+        <h4>Get certificate</h4>
+        <br>
+        <div class="row slideanim">
+            <div class="col-sm-6">
+                <span class="glyphicon glyphicon-credit-card logo-small"></span>
+                <h4>Admin Certificate</h4>
+                <!-- id, pw 입력폼 -->
+                <label for="adminid" class="form-label">관리자ID : </label><br>
+                <input type="text" class="form-control" id="adminid"><br><br>
+                <label for="adminpw" class="form-label">관리자PW : </label><br>
+                <input type="password" class="form-control" id="adminpw"><br><br>
+
+                <button class="btn btn-default" id="admin-btn">관리자인증서생성</button>
+
+            </div>
+            <div class="col-sm-6">
+                <span class="glyphicon glyphicon-heart logo-small"></span>
+                <h4>User Certificate</h4>
+                <label for="userid" class="form-label">사용자ID : </label><br>
+                <input type="text" class="form-control" id="userid"><br><br>
+                <label for="affiliation" class="form-label">사용자부서 : </label><br>
+                <input type="text" class="form-control" id="affiliation"><br><br>
+
+                <button class="btn btn-default" id="user-btn">사용자인증서생성</button>
+            </div>
+
+        </div>
+        <br><br>
+        <div class="row slideanim">
+            <div class="col-sm-6" id="admin-result">
+
+            </div>
+            <div class="col-sm-6" id="user-result">
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Container (Portfolio Section) -->
+    <div id="services" class="container-fluid text-center bg-grey">
+        <h2>SERVICES</h2><br>
+        <h4>We have this process</h4>
+        <div class="row text-center slideanim" >
+            <div class="col-sm-4">
+                <div class="thumbnail">
+                    <img src="/public/images/pic1.jpg" alt="Paris" width="400" height="300">
+                    <p><strong>Propose</strong></p>
+                    <p>Toy Company</p>
+                    
+                    <label for="p_cert" class="form-label">인증서 : </label><br>
+                    <input type="text" class="form-control" id="p_cert"><br>
+                    <label for="p_eid" class="form-label">체험이벤트 ID : </label><br>
+                    <input type="text" class="form-control" id="p_eid"><br>
+                    <label for="p_sid" class="form-label">제안 기관 ID : </label><br>
+                    <input type="text" class="form-control" id="p_sid"><br>
+                    <label for="p_kcid" class="form-label">카페운영기관 ID : </label><br>
+                    <input type="text" class="form-control" id="p_kcid"><br>
+
+                    <button class="btn btn-default" id="propose-btn">체험이벤트 제안</button>
+
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="thumbnail">
+                    <img src="/public/images/pic2.png" alt="New York" width="400" height="300">
+                    <p><strong>Confirm</strong></p>
+                    <p>Kids Cafe</p>
+
+                    <label for="p_cert" class="form-label">인증서 : </label><br>
+                    <input type="text" class="form-control" id="c_cert"><br>
+                    <label for="p_eid" class="form-label">체험이벤트 ID : </label><br>
+                    <input type="text" class="form-control" id="c_eid"><br>
+                    <label for="p_kcid" class="form-label">카페운영기관 ID : </label><br>
+                    <input type="text" class="form-control" id="c_kcid"><br>
+
+                    <button class="btn btn-default disabled" id="confirm-btn">체험이벤트 수락</button>
+
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="thumbnail">
+                    <img src="/public/images/pic3.jpg" alt="San Francisco" width="400" height="300">
+                    <p><strong>Input Details</strong></p>
+                    <p>Toy Company+Kids Cafe</p>
+                </div>
+            </div>
+            <br>
+        </div>
+
+        <div class="row text-center slideanim">
+            <div class="col-sm-4" id="propose-result">
+                &nbsp;
+            </div>
+            <div class="col-sm-4">
+                &nbsp;
+            </div>
+            <div class="col-sm-4">
+                &nbsp;
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Container (Pricing Section) -->
+    <div id="records" class="container-fluid">
+        <div class="text-center">
+            <h2>Records</h2>
+            <h4>Query event status and history</h4>
+        </div>
+        <div class="row slideanim">
+            <div class="col-sm-6 col-xs-12">
+                <div class="panel panel-default text-center">
+                    <div class="panel-heading">
+                        <h1>Status</h1>
+                    </div>
+                    <div class="panel-body">
+                        <label for="q_cert" class="form-ltabel">인증서 : </label><br>
+                        <input type="text" class="form-control" id="q_cert"><br>
+                        <label for="q_eid" class="form-label">체험이벤트 ID : </label><br>
+                        <input type="text" class="form-control" id="q_eid"><br>
+                        
+                    </div>
+                    <div class="panel-footer">
+                        <button class="btn btn-lg" id="query-btn">체험이벤트조회</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+                <div class="panel panel-default text-center">
+                    <div class="panel-heading">
+                        <h1>History</h1>
+                    </div>
+                    <div class="panel-body">
+                        <label for="h_cert" class="form-ltabel">인증서 : </label><br>
+                        <input type="text" class="form-control" id="h_cert"><br>
+                        <label for="h_eid" class="form-label">체험이벤트 ID : </label><br>
+                        <input type="text" class="form-control" id="h_eid"><br>
+      
+                    </div>
+                    <div class="panel-footer">
+
+                        <button class="btn btn-lg" id="history-btn">이력조회</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row slideanim">
+            <div class="col-sm-6 col-xs-12" id="query-result">
+                &nbsp;
+            </div>
+            <div class="col-sm-6 col-xs-12" id="history-result">
+                &nbsp;
+            </div>
+        </div>
+    </div>
+
+    <!-- Container (Contact Section) -->
+    <div id="contact" class="container-fluid bg-grey">
+        <h2 class="text-center">CONTACT</h2>
+        <div class="row">
+            <div class="col-sm-5">
+                <p>Contact us and we' ll get back to you within 24 hours.</p>
+                <p><span class="glyphicon glyphicon-map-marker"></span> Chicago, US</p>
+                <p><span class="glyphicon glyphicon-phone"></span> +00 1515151515</p>
+                <p><span class="glyphicon glyphicon-envelope"></span> myemail@something.com</p>
+            </div>
+            <div class="col-sm-7 slideanim">
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+                    </div>
+                </div>
+                <textarea class="form-control" id="comments" name="comments" placeholder="Comment"
+                    rows="5"></textarea><br>
+                <div class="row">
+                    <div class="col-sm-12 form-group">
+                        <button class="btn btn-default pull-right" type="submit">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image of location/map -->
+    <img src="/w3images/map.jpg" class="w3-image w3-greyscale-min" style="width:100%">
+
+    <footer class="container-fluid text-center">
+        <a href="#myPage" title="To Top">
+            <span class="glyphicon glyphicon-chevron-up"></span>
+        </a>
+        <p>Bootstrap Theme Made By <a href="https://www.w3schools.com" title="Visit w3schools">www.w3schools.com</a>
+        </p>
+    </footer>
+
+    <script>
+        $(document).ready(function () {
+            // Add smooth scrolling to all links in navbar + footer link
+            $(".navbar a, footer a[href='#myPage']").on('click', function (event) {
+                // Make sure this.hash has a value before overriding default behavior
+                if (this.hash !== "") {
+                    // Prevent default anchor click behavior
+                    event.preventDefault();
+
+                    // Store hash
+                    var hash = this.hash;
+
+                    // Using jQuery's animate() method to add smooth page scroll
+                    // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top
+                    }, 900, function () {
+
+                        // Add hash (#) to URL when done scrolling (default click behavior)
+                        window.location.hash = hash;
+                    });
+                } // End if
+            });
+
+            $(window).scroll(function () {
+                $(".slideanim").each(function () {
+                    var pos = $(this).offset().top;
+
+                    var winTop = $(window).scrollTop();
+                    if (pos < winTop + 600) {
+                        $(this).addClass("slide");
+                    }
+                });
+            });
+        })
+
+        $("#admin-btn").click(function () {
+            const aid = $("#adminid").val();
+            const apw = $("#adminpw").val();
+
+            $.post('/admin', { adminid: aid, adminpw: apw }, function (data, status) {
+
+                $("#admin-result").empty();
+                $("#admin-result").append("RESULT: " + data.result + "<br>");
+                if (data.result == 'success') {
+                    $("#admin-result").append("MESSAGE: " + data.message + "<br>");
+                } else {
+                    $("#admin-result").append("ERROR: " + data.error + "<br>");
+                }
+            })
+        });
+
+        $("#user-btn").click(function () {
+            const UID = $("#userid").val();
+            const affiliation = $("#affiliation").val();
+
+            console.log("user gen button clicked : ", UID, affiliation);
+
+            $.post('/user', { userid: UID, affiliation: affiliation }, function (data, status) {
+
+                $("#user-result").empty();
+
+                var html_table = '<table class="table table-hover"><thead><tr><th scope="col" width="30%">&nbsp</th><th scope="col" width="70%">VALUE</th></tr></thead>';
+
+                html_table += `<tbody><tr><th>RESULT</td><td>${data.result}</td></tr>`;
+
+                if (data.result == 'success') {
+                    html_table += `<tr><th>MESSAGE</td><td>${data.message}</td></tr></tbody></table>`;
+                } else {
+                    html_table += `<tr><th>ERROR</td><td>${data.error}</td></tr></tbody></table>`;
+                }
+
+                $("#user-result").append(html_table);
+
+            })
+        });
+
+        $("#propose-btn").click(function () {
+            const p_cert = $("#p_cert").val();
+            const p_eid = $("#p_eid").val();
+            const p_sid = $("#p_sid").val();
+            const p_kcid = $("#p_kcid").val();
+
+            console.log("experience propose button clicked : ", p_cert, p_eid, p_sid, p_kcid);
+
+            $.post('/experience', { p_cert, p_eid, p_sid, p_kcid }, function (data, status) {
+
+                $("#propose-result").empty();
+
+                var html_table = '<table class="table table-hover"><thead><tr><th scope="col" width="30%">&nbsp</th><th scope="col" width="70%">VALUE</th></tr></thead>';
+
+                html_table += `<tbody><tr><th>RESULT</td><td>${data.result}</td></tr>`;
+
+                if (data.result == 'success') {
+                    html_table += `<tr><th>MESSAGE</td><td>${data.message}</td></tr></tbody></table>`;
+                } else {
+                    html_table += `<tr><th>ERROR</td><td>${data.error}</td></tr></tbody></table>`;
+                }
+
+                $("#propose-result").append(html_table);
+
+            })
+        });
+
+        $("#query-btn").click(function () {
+        const q_cert = $("#q_cert").val();
+        const q_eid = $("#q_eid").val();
+
+        console.log("experience query button clicked : ", q_cert, q_eid);
+
+        $.get('/experience', { q_cert, q_eid }, function (data, status) {
+
+            console.log(data.message)
+            $("#query-result").empty();
+
+            var html_table = '<table class="table table-hover"><thead><tr><th scope="col" width="30%">&nbsp</th><th scope="col" width="70%">VALUE</th></tr></thead>';
+
+            html_table += `<tbody><tr><th>RESULT</td><td>${data.result}</td></tr>`;
+
+            if (data.result == 'success') {
+                html_table += `<tr><th>MESSAGE</td><td>${JSON.stringify(data.message)}</td></tr></tbody></table>`;
+            } else {
+                html_table += `<tr><th>ERROR</td><td>${data.error}</td></tr></tbody></table>`;
+            }
+
+            $("#query-result").append(html_table);
+
+        })
+    });
+
+    // 이력버튼이 클릭되었을 때
+    $("#history-btn").click(function () {
+        const q_cert = $("#h_cert").val();
+        const q_eid = $("#h_eid").val();
+
+        console.log("experience history button clicked : ", q_cert, q_eid);
+
+        $.get('/experience/history', { h_cert: q_cert, h_id: q_eid }, function (data, status) {
+
+            console.log(data.message)
+            $("#history-result").empty();
+
+            var html_table = '<table class="table table-hover" width="100%"><thead><tr><th scope="col" width="30%">&nbsp</th><th scope="col" width="70%">VALUE</th></tr></thead>';
+
+            html_table += `<tbody><tr><th>RESULT</td><td>${data.result}</td></tr>`;
+
+            if (data.result == 'success') {
+                html_table += `<tr><th>MESSAGE</td><td>`;
+                    // 반복문으로 data 를 보여주기
+                    for( i=0 ; i< data.message.length ; i++)
+                    {
+                        html_table += `<b>${i}번째 transaction</b><br>`
+                        html_table += `txid : ${data.message[i].txId}<br>`
+                        html_table += `record : (eventid) ${data.message[i].record.eid}<br>`
+                        html_table += `record : (subjectid) ${data.message[i].record.sid}<br>`
+                        html_table += `record : (kidscafeid) ${data.message[i].record.kid}<br>`
+                        html_table += `record : (details) ${data.message[i].record.details}<br>`
+                        html_table += `record : (status) ${data.message[i].record.status}<br>`
+                        html_table += `timestamp : ${data.message[i].timestamp}<br>`
+                        html_table += `isdelete : ${data.message[i].isDelete}<br>`
+
+                    }
+                html_table += `</td></tr></tbody></table>`;
+            } else {
+                html_table += `<tr><th>ERROR</td><td>${data.error}</td></tr></tbody></table>`;
+            }
+
+            $("#history-result").append(html_table);
+
+        })
+    });
+
+    </script>
+
+</body>
+
+</html>

@@ -105,7 +105,7 @@ services:
     image: hyperledger/fabric-peer:latest
     environment:
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
-      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=net_test
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=ibang_test
       - FABRIC_LOGGING_SPEC=INFO
       - CORE_PEER_TLS_ENABLED=true
       - CORE_PEER_PROFILE_ENABLED=true
@@ -141,7 +141,7 @@ services:
     environment:
       #Generic peer variables
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
-      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=net_test
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=ibang_test
       - FABRIC_LOGGING_SPEC=INFO
       - CORE_PEER_TLS_ENABLED=true
       - CORE_PEER_PROFILE_ENABLED=true
@@ -177,7 +177,7 @@ services:
     environment:
       #Generic peer variables
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
-      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=net_test
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=ibang_test
       - FABRIC_LOGGING_SPEC=INFO
       - CORE_PEER_TLS_ENABLED=true
       - CORE_PEER_PROFILE_ENABLED=true

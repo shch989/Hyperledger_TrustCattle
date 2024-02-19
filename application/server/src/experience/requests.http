@@ -1,0 +1,16 @@
+### 체험 추가 POST
+POST http://localhost:5000/experience
+Content-Type: application/json
+
+{
+  "cert": "user4",
+  "eid": "event3",
+  "sid": "subject2",
+  "kcid": "kidsCafe5"
+}
+
+### 체험 읽기 GET
+GET http://localhost:5000/experience?cert=user4&id=event3
+
+### 체험 기록 GET
+GET http://localhost:5000/experience/history?cert=user3&id=event2
